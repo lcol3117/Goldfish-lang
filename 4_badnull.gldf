@@ -1,0 +1,9 @@
+;; This one should panic
+
+givemenull << ~ >> {
+  &checknull ;; This causes the panic
+  @ << ~
+}
+
+;; This is the mistake
+(givemenull | "A string is not null")

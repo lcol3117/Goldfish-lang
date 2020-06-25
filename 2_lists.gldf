@@ -1,0 +1,18 @@
+oldlist << [1,2,3,78,2]
+
+;; 2 ways to map
+
+;; More readable
+incrementedlist << (map | oldlist | x >> {
+  @ << (+ | x | 1)
+})
+
+;; More concise
+squarelist << (map | oldlist | x >> (* | x | x))
+
+(console.log | incrementedlist)
+(console.log | squarelist)
+
+;; You can filter and reduce too
+
+

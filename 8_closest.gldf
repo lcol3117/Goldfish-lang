@@ -1,0 +1,18 @@
+closesttransform << data >> {
+  @ << (map | data | (closest | data))
+}
+closest << data >> point >> {
+  dists << (map | data | (dist | point))
+  distsnotself << (filter | dists | x >> {
+    @ << (not | (is | x | 0))
+  })
+  @ << (Math.min | ...distsnotself)
+}
+dist << a >> b >> {
+  drange << (range | 0 | (length | a))
+  ddists << (map | drange | x >> {
+    @ << (^ | (- | (at | a | x) | (at | b | x)) | 2)
+  })
+  sumd << (reduce | ddists | (+))
+  @ << (Math.sqrt | sumd)
+}

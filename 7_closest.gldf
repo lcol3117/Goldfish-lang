@@ -1,0 +1,36 @@
+;; This is some example code to see what real code
+;; looks like written in Goldfish
+
+;; The closesttransform function takes
+;; a list of points
+;; and returns a list of the distance
+;; the respective point to the closest point
+
+closesttransform << data >> {
+  @ << (map | data | (closest | data))
+}
+closest << data >> point >> {
+  dists << (map | data | (dist | point))
+  distsnotself << (filter | dists | x >> {
+    @ << (not | (is | x | 0))
+  })
+  @ << (Math.min | ...distsnotself)
+}
+dist << a >> b >> {
+  drange << (range | 0 | (length | a))
+  ddists << (map | drange | x >> {
+    @ << (^ | (- | (at | a | x) | (at | b | x)) | 2)
+  })
+  sumd << (reduce | ddists | (+))
+  @ << (Math.sqrt | sumd)
+}
+
+;; test
+
+dataset << [[1,2],[3,3],[5,17]]
+
+result << (closesttransform | dataset)
+
+(console.log | result)
+
+;; The next file (8_closest.gldf) is just the function 

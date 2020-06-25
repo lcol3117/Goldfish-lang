@@ -1,0 +1,36 @@
+;; I am a comment
+
+;; This is how you call the function
+;; console.log with the parameter "Hello"
+
+(console.log | "Hello")
+
+;; greet is a function
+
+;; greet takes text, and returns a function
+;; that takes nice, and then returns the message
+
+greet << text >> nice >> {
+  friendly << (+ | "Hello " | text)
+  @ << (if | nice | friendly | "Go away!")
+}
+
+;; Same syntax for variables and functions
+
+name << "goldfish"
+
+;; There are boolean operators defined by goldfish
+;; and, or, not, nand, and nor
+
+nope << (nand | true | true)
+yep << (not | (or | false | false))
+
+;; Nesting works normally
+
+(console.log | (greet | name | nope))
+(console.log | (greet | name | yep))
+
+;; This should print
+;; Hello
+;; Go away!
+;; Hello goldfish

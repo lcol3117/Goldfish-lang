@@ -1,0 +1,40 @@
+;; Goldfish is a functional language
+;; Immutability is enforced
+
+x << 5
+
+;; making x 3 causes an error
+
+;; There are only monads also
+
+monad << x >> y >> z >> {
+  @ << (and | (or | x | y) | z)
+}
+
+;; Haskell-style:
+;; monad :: (Bool -> (Bool -> (Bool -> Bool)))
+
+;; this is not monad(true, false, true)
+;; this is monad(true)(false)(true)
+
+result << (monad | true | false | true)
+
+;; Evidence
+
+part1 << (monad | true)
+part2 << (part1 | false)
+part3 << (part2 | true)
+
+(console.log | part1)
+(console.log | part2)
+(console.log | part3)
+
+;; -> [Function]
+;; -> [Function]
+;; -> true
+
+;; You use is for equality, by the way
+
+(console.log | (is | part3 | result))
+
+;; -> true

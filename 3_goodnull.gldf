@@ -1,0 +1,10 @@
+;; ~ represents null, and can be used as a parameter
+
+helloworldfn << ~ >> {
+  &checknull
+  ;; This decorator ensures that a null parameter is null
+  (console.log | "Hello World!")
+  @ << ~
+}
+
+(helloworldfn | ~)
